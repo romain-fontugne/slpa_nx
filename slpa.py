@@ -36,7 +36,6 @@ def find_communities(G,T,r):
             else:
                 memory[listener][acceptedLabel] = 1
 
-    print memory
 
     ## Stage 3:
     for node, mem in memory.iteritems():
@@ -56,16 +55,16 @@ def find_communities(G,T,r):
 
 
     # Remove nested communities
-    nestedCommunities = []
+    nestedCommunities = set()
     keys = communities.keys()
     for i, label0 in enumerate(keys[:-1]):
         comm0 = communities[label0]
         for label1 in keys[i+1:]:
             comm1 = communities[label1]
             if comm0.issubset(comm1):
-                nestedCommunities.append(label0)
+                nestedCommunities.add(label0)
             elif comm0.issuperset(comm1):
-                nestedCommunities.append(label1)
+                nestedCommunities.add(label1)
     
     for comm in nestedCommunities:
         del communities[comm]
