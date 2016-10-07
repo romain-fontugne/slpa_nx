@@ -20,6 +20,9 @@ def find_communities(G,T,r):
 
         for listener in listenersOrder:
             speakers = G[listener].keys()
+            if len(speakers)==0:
+                continue
+
             labels = defaultdict(int)
 
             for j, speaker in enumerate(speakers):
